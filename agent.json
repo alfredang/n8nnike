@@ -242,8 +242,19 @@
         "operation": "sendAndWait",
         "sendTo": "angch@tertiaryinfotech.com",
         "subject": "=[Nike China - Approval Required] Shoe Enquiry from {{ $('Webhook').item.json.body.name }}",
-        "message": "=<h3>Customer Details</h3><p><strong>Name:</strong> {{ $('Webhook').item.json.body.name }}<br><strong>Email:</strong> {{ $('Webhook').item.json.body.email }}<br><strong>Tel:</strong> {{ $('Webhook').item.json.body.tel }}</p><h3>Customer Message</h3><p>{{ $('Webhook').item.json.body.message }}</p><hr><h3>AI Drafted Email Reply</h3><p>{{ $json.draft }}</p><hr><p><em>Click Approve to send this email to the customer, or reply with feedback to revise the draft.</em></p>",
-        "options": {}
+        "message": "=<h3>Customer Details</h3><p><strong>Name:</strong> {{ $('Webhook').item.json.body.name }}<br><strong>Email:</strong> {{ $('Webhook').item.json.body.email }}<br><strong>Tel:</strong> {{ $('Webhook').item.json.body.tel }}</p><h3>Customer Message</h3><p>{{ $('Webhook').item.json.body.message }}</p><hr><h3>AI Drafted Email Reply</h3><p>{{ $json.draft }}</p><hr><p><em>Click <strong>Approve</strong> to send this email to the customer, or click <strong>Request Revision</strong> and provide feedback for the AI to revise.</em></p>",
+        "responseType": "freeText",
+        "options": {
+          "appendAttributionToBody": false,
+          "approvalOptions": {
+            "values": {
+              "approveLabel": "Approve",
+              "buttonApprovalStyle": "primary",
+              "disapproveLabel": "Request Revision",
+              "buttonDisapprovalStyle": "secondary"
+            }
+          }
+        }
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
@@ -272,11 +283,11 @@
           "conditions": [
             {
               "id": "condition-approval-check",
-              "leftValue": "={{ $json.response }}",
-              "rightValue": "",
+              "leftValue": "={{ $json.response.status }}",
+              "rightValue": "approved",
               "operator": {
                 "type": "string",
-                "operation": "empty"
+                "operation": "equals"
               }
             }
           ],
@@ -324,7 +335,7 @@
             {
               "id": "feedback-chatinput",
               "name": "chatInput",
-              "value": "=The approver has rejected the previous email draft and provided feedback.\n\nOriginal customer enquiry from {{ $('Webhook').item.json.body.name }} ({{ $('Webhook').item.json.body.email }}, {{ $('Webhook').item.json.body.tel }}):\n{{ $('Webhook').item.json.body.message }}\n\nPrevious draft that was rejected:\n{{ $('Store Draft').item.json.draft }}\n\nApprover feedback:\n{{ $json.response }}\n\nPlease revise the email draft incorporating the approver's feedback. Output ONLY the revised email body text.",
+              "value": "=The approver has rejected the previous email draft and provided feedback.\n\nOriginal customer enquiry from {{ $('Webhook').item.json.body.name }} ({{ $('Webhook').item.json.body.email }}, {{ $('Webhook').item.json.body.tel }}):\n{{ $('Webhook').item.json.body.message }}\n\nPrevious draft that was rejected:\n{{ $('Store Draft').item.json.draft }}\n\nApprover feedback:\n{{ $json.response.text }}\n\nPlease revise the email draft incorporating the approver's feedback. Output ONLY the revised email body text.",
               "type": "string"
             }
           ]
