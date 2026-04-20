@@ -304,6 +304,7 @@
     },
     {
       "parameters": {
+        "operation": "send",
         "sendTo": "={{ $('Webhook').item.json.body.email }}",
         "subject": "=Nike China - Re: Your Shoe Enquiry, {{ $('Webhook').item.json.body.name }}",
         "message": "={{ $('Store Draft').item.json.draft }}",
