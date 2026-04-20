@@ -252,21 +252,6 @@
     },
     {
       "parameters": {
-        "mode": "runOnceForEachItem",
-        "jsCode": "// Check all possible approval fields from sendAndWait output\nconst data = $input.item.json;\n\n// Check every possible field that could indicate approval\nlet isApproved = false;\n\nif (data.approved === true || data.approved === 'true') isApproved = true;\nif (data.response === 'Approved') isApproved = true;\nif (data.status === 'approved') isApproved = true;\nif (data.action === 'approve') isApproved = true;\n\n// Pass through all original data plus our flag\nreturn { json: { ...data, _isApproved: isApproved } };",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        23248,
-        10032
-      ],
-      "id": "9410451d-28b4-42d5-8933-775d8681661a",
-      "name": "Check Approval"
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": false,
@@ -275,8 +260,8 @@
           },
           "conditions": [
             {
-              "id": "route-approval",
-              "leftValue": "={{ $json._isApproved }}",
+              "id": "condition-approval-check",
+              "leftValue": "={{ $json.data.approved }}",
               "rightValue": true,
               "operator": {
                 "type": "boolean",
@@ -291,11 +276,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        23500,
+        23248,
         10032
       ],
-      "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
-      "name": "Route Approval"
+      "id": "9410451d-28b4-42d5-8933-775d8681661a",
+      "name": "Check Approval"
     },
     {
       "parameters": {
@@ -507,17 +492,6 @@
       ]
     },
     "Check Approval": {
-      "main": [
-        [
-          {
-            "node": "Route Approval",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Route Approval": {
       "main": [
         [
           {
