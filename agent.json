@@ -273,10 +273,10 @@
             {
               "id": "condition-approval-check",
               "leftValue": "={{ $json.response }}",
-              "rightValue": "Approved",
+              "rightValue": "",
               "operator": {
                 "type": "string",
-                "operation": "equals"
+                "operation": "empty"
               }
             }
           ],
