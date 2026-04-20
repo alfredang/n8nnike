@@ -1,0 +1,578 @@
+{
+  "name": "Nike China Customer Service Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Enquiry Form",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload PDF",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf,docx,.csv,.xlsx",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        3648,
+        2704
+      ],
+      "id": "eddb5252-adf0-48b2-a2eb-e84b1d545546",
+      "name": "Upload Document",
+      "webhookId": "d36c72e3-f712-4867-802a-ea570c21fee2"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a Nike China customer service AI assistant. You help customers with enquiries about Nike shoes available in the China market.\n\nThe knowledge base contains Nike shoe product data including: Model name, Price (in RMB), Shoe Type (Running, Lifestyle, Basketball, Trail Running, etc.), Gender (Male, Female, Unisex), Shoe Size, and Stock Level.\n\nWhen a customer submits an enquiry, you receive their name, email, telephone, message, and preferred language (en or zh) in the JSON body.\n\nYour task:\n1. Greet the customer by name.\n2. Check the knowledge base (vector store) to find relevant Nike shoe information to answer their enquiry.\n3. Draft a professional, friendly email reply with specific product details (model, price in RMB, type, available sizes, stock status) when applicable.\n4. If the customer asks in Chinese or their language field is 'zh', reply in Chinese. Otherwise reply in English.\n5. If you cannot find matching shoes, suggest alternatives from the knowledge base or let them know a Nike representative will follow up.\n\nOutput ONLY the email body text. Do NOT include subject lines or email headers. Do NOT fabricate product information - only reference data from the knowledge base."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        4672,
+        2688
+      ],
+      "id": "2dc14dba-95e6-4b77-92a3-88f173c8b6e2",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        4304,
+        3216
+      ],
+      "id": "87ee873b-9a3f-4e3e-a83c-393d525f3d7b",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "Hu8cP5b0Yhomo7VM",
+          "name": "OpenAi API Key (Alfred Account)"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        4576,
+        2960
+      ],
+      "id": "d357b1e0-1560-4131-927d-9caf7b24bee5",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Nike shoe product catalog for China market. Contains model names, prices in RMB, shoe types, gender, sizes, and stock levels. Use this to answer customer questions about Nike shoes.",
+        "memoryKey": {
+          "__rl": true,
+          "value": "nike",
+          "mode": "list",
+          "cachedResultName": "nike"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        4720,
+        2960
+      ],
+      "id": "99ab9dba-ed21-4d84-b9b8-f436b347b1a9",
+      "name": "Query Data Tool"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "nike",
+          "mode": "list"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        3824,
+        2704
+      ],
+      "id": "6693e5c6-bd32-4cec-a042-b19250364f5f",
+      "name": "Insert Data to Store"
+    },
+    {
+      "parameters": {
+        "content": "### 📚 Step 1 Upload Files to Vector Data Store",
+        "height": 460,
+        "width": 700,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3584,
+        2640
+      ],
+      "typeVersion": 1,
+      "id": "274648f0-c8e4-405d-918c-29cda1f585e1",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "### 🤖 Step 2 Customer Enquiry → AI Draft → Human Approval → Send Email",
+        "height": 520,
+        "width": 2100,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        4304,
+        2384
+      ],
+      "typeVersion": 1,
+      "id": "2242e2a9-f982-418b-9da0-25c6a54c7e6c",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        4176,
+        2864
+      ],
+      "id": "f088c2dd-91f5-4ea6-93f6-754cb0e1a006",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6e9f66ac-e36a-417b-a755-08c3c99e9ee7",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        4368,
+        2688
+      ],
+      "id": "61560b9c-8c97-4a90-b292-30431ab1acfa",
+      "name": "Webhook",
+      "webhookId": "6e9f66ac-e36a-417b-a755-08c3c99e9ee7"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        4416,
+        2960
+      ],
+      "id": "11ec296f-a97b-4299-865c-dab7e7fc9262",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "Hu8cP5b0Yhomo7VM",
+          "name": "OpenAi API Key (Alfred Account)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ output: $json.output }) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        4928,
+        2464
+      ],
+      "id": "e5453a77-1a57-49a8-bffe-eaccc445cddd",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "draft-field",
+              "name": "draft",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4976,
+        2688
+      ],
+      "id": "191da45f-fc96-4501-8f94-409f2dccd936",
+      "name": "Store Draft"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "angch@tertiaryinfotech.com",
+        "subject": "=[Nike China - Approval Required] Shoe Enquiry from {{ $('Webhook').item.json.body.name }}",
+        "message": "=<h3>Customer Details</h3><p><strong>Name:</strong> {{ $('Webhook').item.json.body.name }}<br><strong>Email:</strong> {{ $('Webhook').item.json.body.email }}<br><strong>Tel:</strong> {{ $('Webhook').item.json.body.tel }}</p><h3>Customer Message</h3><p>{{ $('Webhook').item.json.body.message }}</p><hr><h3>AI Drafted Email Reply</h3><p>{{ $json.draft }}</p><hr><p><em>Click Approve to send this email to the customer, or reply with feedback to revise the draft.</em></p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5264,
+        2688
+      ],
+      "id": "cce70456-c7ab-4649-be58-6d05709264a3",
+      "name": "Send Draft for Approval",
+      "webhookId": "94003d0b-dfca-490a-8532-62387ed3ec1a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MTzer4MNXRwyE36l",
+          "name": "Gmail OAuth (Sales Account)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "condition-approval-check",
+              "leftValue": "={{ $json.response }}",
+              "rightValue": "Approved",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        5568,
+        2688
+      ],
+      "id": "d11c82b5-c9cd-4de2-9d28-a1d51d42f056",
+      "name": "Check Approval"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
+        "subject": "=Nike China - Re: Your Shoe Enquiry, {{ $('Webhook').item.json.body.name }}",
+        "message": "={{ $('Store Draft').item.json.draft }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        5872,
+        2512
+      ],
+      "id": "bb80dda3-f002-4a82-b72b-f5c90a3f614f",
+      "name": "Send Email to Customer",
+      "webhookId": "198f98d4-416c-4dc8-aceb-baad1c82fd64",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MTzer4MNXRwyE36l",
+          "name": "Gmail OAuth (Sales Account)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "feedback-chatinput",
+              "name": "chatInput",
+              "value": "=The approver has rejected the previous email draft and provided feedback.\n\nOriginal customer enquiry from {{ $('Webhook').item.json.body.name }} ({{ $('Webhook').item.json.body.email }}, {{ $('Webhook').item.json.body.tel }}):\n{{ $('Webhook').item.json.body.message }}\n\nPrevious draft that was rejected:\n{{ $('Store Draft').item.json.draft }}\n\nApprover feedback:\n{{ $json.response }}\n\nPlease revise the email draft incorporating the approver's feedback. Output ONLY the revised email body text.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5872,
+        2864
+      ],
+      "id": "61004e6a-ac5f-4441-b0a6-96cd1c4fe7a2",
+      "name": "Prepare Feedback"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a Nike China customer service email editor. You receive a previously drafted email about Nike shoes that was rejected by the manager, along with their feedback. Revise the email draft incorporating the feedback while maintaining a professional, friendly tone consistent with the Nike brand. If the original email was in Chinese, keep it in Chinese. Output ONLY the revised email body text. Do NOT include subject lines or email headers."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        6176,
+        2864
+      ],
+      "id": "42f7ddfa-bc28-4dcf-a743-02d69a6c8829",
+      "name": "Redraft Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        6176,
+        3104
+      ],
+      "id": "81871957-7dd1-4fd1-89d9-b72554f08a82",
+      "name": "OpenAI Chat Model Redraft",
+      "credentials": {
+        "openAiApi": {
+          "id": "Hu8cP5b0Yhomo7VM",
+          "name": "OpenAi API Key (Alfred Account)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Upload Document": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Data Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model Redraft": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Redraft Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Store Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Draft": {
+      "main": [
+        [
+          {
+            "node": "Send Draft for Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Draft for Approval": {
+      "main": [
+        [
+          {
+            "node": "Check Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Approval": {
+      "main": [
+        [
+          {
+            "node": "Send Email to Customer",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Feedback": {
+      "main": [
+        [
+          {
+            "node": "Redraft Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redraft Agent": {
+      "main": [
+        [
+          {
+            "node": "Store Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "f4e5e4eb-d062-4f22-8821-1aa0e6b023bc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dd9d815cb100cab73a9cd63cc3f30fd090e73e9edbdc09a51a025bdf1bf015af"
+  },
+  "id": "5lGWbMEnkjHAboSe",
+  "tags": []
+}

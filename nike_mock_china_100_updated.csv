@@ -1,0 +1,101 @@
+Model,Price_RMB,Shoe_Type,Gender,shoe_size,stock_level
+Nike Air Zoom Dragonfly 1,899,Running,Unisex,36,34
+Nike Pegasus Trail 2,799,Trail Running,Male,42,457
+Nike React Infinity 3,999,Running,Female,38,291
+Nike Air Max Pulse 4,1099,Lifestyle,Unisex,37,451
+Nike ZoomX Vaporfly 5,1599,Running,Male,40,227
+Nike Metcon Turbo 6,899,Cross Training,Female,36,104
+Nike Wildhorse 7,899,Trail Running,Unisex,41,81
+Nike Revolution 8,499,Running,Male,39,482
+Nike Free RN 9,699,Running,Female,36,94
+Nike Air Zoom Structure 10,899,Running,Unisex,38,374
+Nike Pegasus 41 11,999,Running,Male,42,242
+Nike Zoom Fly 12,1199,Running,Female,43,153
+Nike Air Max 270 13,1099,Lifestyle,Unisex,43,124
+Nike Downshifter 14,499,Running,Male,40,170
+Nike Quest 15,599,Running,Female,38,182
+Nike Juniper Trail 16,699,Trail Running,Unisex,41,244
+Nike Infinity Run 17,1099,Running,Male,41,164
+Nike Vaporfly Next% 18,1699,Running,Female,41,82
+Nike Zoom Rival 19,699,Track & Field,Unisex,43,95
+Nike Air Zoom Tempo 20,1299,Running,Male,39,298
+Nike Metcon 21,999,Cross Training,Female,36,483
+Nike Flex Experience 22,499,Running,Unisex,42,297
+Nike Renew Run 23,599,Running,Male,38,303
+Nike Legend Essential 24,699,Gym,Female,42,348
+Nike SuperRep Go 25,899,HIIT,Unisex,41,112
+Nike Air Max SC 26,799,Lifestyle,Male,43,84
+Nike Court Vision 27,699,Basketball,Female,37,334
+Nike Blazer Mid 28,899,Lifestyle,Unisex,43,260
+Nike Dunk Low 29,999,Lifestyle,Male,44,497
+Nike Air Force 1 30,1099,Lifestyle,Female,41,69
+Nike Zoom Freak 31,999,Basketball,Unisex,36,250
+Nike LeBron Witness 32,1099,Basketball,Male,42,183
+Nike Kyrie Low 33,999,Basketball,Female,44,406
+Nike Precision 34,699,Basketball,Unisex,38,390
+Nike Renew Elevate 35,799,Basketball,Male,38,177
+Nike Court Lite 36,699,Tennis,Female,42,131
+Nike Zoom Cage 37,1099,Tennis,Unisex,38,361
+Nike Vapor Lite 38,999,Tennis,Male,36,122
+Nike Air Zoom Vapor 39,1299,Tennis,Female,37,298
+Nike Tiempo Legend 40,1199,Football,Unisex,38,93
+Nike Mercurial Vapor 41,1299,Football,Male,40,13
+Nike Phantom GX 42,1399,Football,Female,38,209
+Nike Streetgato 43,799,Futsal,Unisex,44,370
+Nike SB Chron 44,699,Skateboarding,Male,41,186
+Nike SB Charge 45,599,Skateboarding,Female,37,132
+Nike SB Zoom Blazer 46,899,Skateboarding,Unisex,36,182
+Nike Air Monarch 47,699,Walking,Male,42,333
+Nike Motiva 48,899,Walking,Female,36,345
+Nike Go FlyEase 49,1099,Lifestyle,Unisex,41,51
+Nike Calm Slide 50,299,Sandals,Male,39,93
+Nike Victori One 51,199,Slippers,Female,41,415
+Nike Offcourt Slide 52,249,Sandals,Unisex,36,484
+Nike Air Rift 53,699,Lifestyle,Male,39,159
+Nike React Escape 54,899,Running,Female,39,223
+Nike Run Swift 55,599,Running,Unisex,38,335
+Nike Zoom Span 56,699,Running,Male,42,450
+Nike Air Zoom Vomero 57,1199,Running,Female,40,29
+Nike Free Metcon 58,999,Cross Training,Unisex,38,208
+Nike SuperRep Cycle 59,899,Cycling,Male,43,97
+Nike Zoom Pulse 60,899,Medical/Fitness,Female,36,163
+Nike ACG Mountain Fly 61,1499,Outdoor,Unisex,41,247
+Nike ACG Air Nasu 62,1299,Outdoor,Male,39,219
+Nike ACG Lowcate 63,999,Outdoor,Female,42,260
+Nike ISPA Link 64,1399,Lifestyle,Unisex,41,415
+Nike Space Hippie 65,999,Sustainable,Male,42,389
+Nike Cosmic Unity 66,1099,Basketball,Female,37,23
+Nike Renew Retaliation 67,799,Gym,Unisex,37,334
+Nike Varsity Compete 68,699,Training,Male,39,19
+Nike SpeedRep 69,899,HIIT,Female,37,164
+Nike Air Zoom Pegasus 70,999,Running,Unisex,42,409
+Nike React Miler 71,899,Running,Male,43,323
+Nike Zoom Gravity 72,799,Running,Female,42,378
+Nike Flex Control 73,599,Gym,Unisex,41,337
+Nike Air Max Dawn 74,999,Lifestyle,Male,39,431
+Nike Air Max Excee 75,1099,Lifestyle,Female,42,413
+Nike Air Max Axis 76,899,Lifestyle,Unisex,41,68
+Nike Court Royale 77,699,Tennis,Male,41,127
+Nike Killshot 78,899,Lifestyle,Female,40,284
+Nike Gamma Force 79,999,Lifestyle,Unisex,41,311
+Nike Dunk High 80,1099,Lifestyle,Male,39,202
+Nike Blazer Low 81,799,Lifestyle,Female,36,431
+Nike Court Borough 82,699,Basketball,Unisex,39,377
+Nike Team Hustle 83,599,Basketball,Male,44,23
+Nike Air Zoom BB 84,1299,Basketball,Female,39,237
+Nike Precision VI 85,699,Basketball,Unisex,37,157
+Nike Renew Run 86,599,Running,Male,38,172
+Nike Air Zoom Pegasus Trail 87,999,Trail Running,Female,38,370
+Nike Juniper Trail 88,699,Trail Running,Unisex,36,457
+Nike Wildhorse 89,899,Trail Running,Male,39,380
+Nike Terra Kiger 90,999,Trail Running,Female,42,19
+Nike Zoom Rival Sprint 91,699,Track & Field,Unisex,44,135
+Nike Zoom Victory 92,1299,Track & Field,Male,44,226
+Nike Air Zoom Maxfly 93,1399,Track & Field,Female,42,173
+Nike Superfly Elite 94,1499,Track & Field,Unisex,38,140
+Nike Dragonfly XC 95,1199,Cross Country,Male,42,420
+Nike ZoomX Invincible 96,1199,Running,Female,36,342
+Nike Structure Shield 97,999,Running,Unisex,43,261
+Nike Air Zoom Winflo 98,899,Running,Male,42,411
+Nike Renew Ride 99,699,Running,Female,40,487
+Nike Downshifter 100,499,Running,Unisex,37,475
