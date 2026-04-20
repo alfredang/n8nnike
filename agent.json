@@ -242,8 +242,7 @@
         "operation": "sendAndWait",
         "sendTo": "angch@tertiaryinfotech.com",
         "subject": "=[Nike China - Approval Required] Shoe Enquiry from {{ $('Webhook').item.json.body.name }}",
-        "message": "=<h3>Customer Details</h3><p><strong>Name:</strong> {{ $('Webhook').item.json.body.name }}<br><strong>Email:</strong> {{ $('Webhook').item.json.body.email }}<br><strong>Tel:</strong> {{ $('Webhook').item.json.body.tel }}</p><h3>Customer Message</h3><p>{{ $('Webhook').item.json.body.message }}</p><hr><h3>AI Drafted Email Reply</h3><p>{{ $json.draft }}</p><hr><p><strong>Instructions:</strong></p><ul><li>Type <strong>APPROVE</strong> to send this email to the customer as-is</li><li>Type your <strong>feedback</strong> (e.g. &quot;make it more formal&quot; or &quot;add warranty info&quot;) to have the AI revise the draft</li></ul>",
-        "responseType": "freeText",
+        "message": "=<h3>Customer Details</h3><p><strong>Name:</strong> {{ $('Webhook').item.json.body.name }}<br><strong>Email:</strong> {{ $('Webhook').item.json.body.email }}<br><strong>Tel:</strong> {{ $('Webhook').item.json.body.tel }}</p><h3>Customer Message</h3><p>{{ $('Webhook').item.json.body.message }}</p><hr><h3>AI Drafted Email Reply</h3><p>{{ $json.draft }}</p><hr><p>Click <strong>Approve</strong> to send this email to the customer, or <strong>Disapprove</strong> to reject.</p>",
         "options": {
           "appendAttributionToBody": false
         }
@@ -276,10 +275,10 @@
             {
               "id": "condition-approval-check",
               "leftValue": "={{ $json.response }}",
-              "rightValue": "approve",
+              "rightValue": "Approved",
               "operator": {
                 "type": "string",
-                "operation": "contains"
+                "operation": "equals"
               }
             }
           ],
