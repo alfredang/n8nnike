@@ -244,7 +244,15 @@
         "subject": "=[Nike China - Approval Required] Shoe Enquiry from {{ $('Webhook').item.json.body.name }}",
         "message": "=<h3>Customer Details</h3><p><strong>Name:</strong> {{ $('Webhook').item.json.body.name }}<br><strong>Email:</strong> {{ $('Webhook').item.json.body.email }}<br><strong>Tel:</strong> {{ $('Webhook').item.json.body.tel }}</p><h3>Customer Message</h3><p>{{ $('Webhook').item.json.body.message }}</p><hr><h3>AI Drafted Email Reply</h3><p>{{ $json.draft }}</p><hr><p>Click <strong>Approve</strong> to send this email to the customer, or <strong>Disapprove</strong> to reject.</p>",
         "options": {
-          "appendAttributionToBody": false
+          "appendAttributionToBody": false,
+          "approvalOptions": {
+            "values": {
+              "approveLabel": "Approve",
+              "buttonApprovalStyle": "primary",
+              "disapproveLabel": "Reject & Revise",
+              "buttonDisapprovalStyle": "secondary"
+            }
+          }
         }
       },
       "type": "n8n-nodes-base.gmail",
