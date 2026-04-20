@@ -61,17 +61,6 @@
       }
     },
     {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        4576,
-        2960
-      ],
-      "id": "d357b1e0-1560-4131-927d-9caf7b24bee5",
-      "name": "Simple Memory"
-    },
-    {
       "parameters": {
         "mode": "retrieve-as-tool",
         "toolName": "knowledge_base",
@@ -425,17 +414,6 @@
           {
             "node": "Insert Data to Store",
             "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Simple Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_memory",
             "index": 0
           }
         ]
