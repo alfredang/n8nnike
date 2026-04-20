@@ -261,11 +261,11 @@
           "conditions": [
             {
               "id": "condition-approval-check",
-              "leftValue": "={{ $json.response }}",
-              "rightValue": "Approved",
+              "leftValue": "={{ $json.approved }}",
+              "rightValue": true,
               "operator": {
-                "type": "string",
-                "operation": "equals"
+                "type": "boolean",
+                "operation": "true"
               }
             }
           ],
