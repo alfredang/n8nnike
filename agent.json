@@ -484,25 +484,7 @@
       "main": [
         [
           {
-            "node": "Check Approval",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check Approval": {
-      "main": [
-        [
-          {
             "node": "Send Email to Customer",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Prepare Feedback",
             "type": "main",
             "index": 0
           }
