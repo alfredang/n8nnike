@@ -289,6 +289,23 @@
       color: var(--text);
       white-space: pre-wrap;
     }
+
+    .footer {
+      text-align: center;
+      padding: 1rem 2rem 1.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover { color: var(--text); }
   </style>
 </head>
 <body>
@@ -338,6 +355,9 @@
         <div class="ai-reply-body" id="aiReplyBody"></div>
       </div>
     </div>
+    <div class="footer" data-i18n="footer">
+      Powered by <a href="https://www.tertiarycourses.com.sg/" target="_blank" rel="noopener">Tertiary Infotech Academy Pte Ltd</a>
+    </div>
   </div>
 
   <script>
@@ -359,7 +379,8 @@
         aiLabel: 'AI Assistant Preview',
         success: 'Thank you! Your enquiry has been received. Our team will review and respond to you via email shortly.',
         error: 'Something went wrong. Please try again later.',
-        langSwitch: '中文'
+        langSwitch: '中文',
+        footer: ''
       },
       zh: {
         brand: '耐克中国',
@@ -377,7 +398,8 @@
         aiLabel: 'AI 助手预览',
         success: '感谢您的咨询！我们的团队将审核后通过邮件回复您。',
         error: '出现了一些问题，请稍后再试。',
-        langSwitch: 'EN'
+        langSwitch: 'EN',
+        footer: ''
       }
     };
 
@@ -391,7 +413,7 @@
       const t = i18n[lang];
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (t[key]) el.textContent = t[key];
+        if (t[key] && key !== 'footer') el.textContent = t[key];
       });
       document.querySelectorAll('[data-i18n-ph]').forEach(el => {
         const key = el.getAttribute('data-i18n-ph');
