@@ -298,7 +298,7 @@
             {
               "id": "feedback-chatinput",
               "name": "chatInput",
-              "value": "=The approver has rejected the previous email draft and provided feedback.\n\nOriginal customer enquiry from {{ $('Webhook').item.json.body.name }} ({{ $('Webhook').item.json.body.email }}, {{ $('Webhook').item.json.body.tel }}):\n{{ $('Webhook').item.json.body.message }}\n\nPrevious draft that was rejected:\n{{ $('Store Draft').item.json.draft }}\n\nApprover feedback:\n{{ $json.response }}\n\nPlease revise the email draft incorporating the approver's feedback. Output ONLY the revised email body text.",
+              "value": "=The approver has rejected the previous email draft and provided feedback.\n\nOriginal customer enquiry from {{ $('Webhook').item.json.body.name }} ({{ $('Webhook').item.json.body.email }}, {{ $('Webhook').item.json.body.tel }}):\n{{ $('Webhook').item.json.body.message }}\n\nPrevious draft that was rejected:\n{{ $('Store Draft').item.json.draft }}\n\nApprover feedback:\n{{ $json.data.text || $json.response || $json.data.response || 'No specific feedback provided - please improve the draft.' }}\n\nPlease revise the email draft incorporating the approver's feedback. Output ONLY the revised email body text.",
               "type": "string"
             }
           ]
@@ -313,6 +313,31 @@
       ],
       "id": "965f7528-d10d-4ac1-9147-57b9db03e21f",
       "name": "Prepare Feedback"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "angch@tertiaryinfotech.com",
+        "subject": "=[Nike China - Feedback Required] Please provide revision feedback",
+        "message": "=<h3>You declined the AI draft for {{ $('Webhook').item.json.body.name }}</h3><p>The previous AI-drafted email was:</p><blockquote>{{ $('Store Draft').item.json.draft }}</blockquote><hr><p>Please type your feedback below to tell the AI how to revise the email (e.g. &quot;make it more formal&quot;, &quot;add warranty details&quot;, &quot;translate to Chinese&quot;).</p>",
+        "responseType": "freeText",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2128,
+        1888
+      ],
+      "id": "d1e2f3a4-b5c6-7890-abcd-feedback00001",
+      "name": "Ask for Feedback",
+      "webhookId": "f1e2d3c4-b5a6-7890-abcd-feedback00002",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MTzer4MNXRwyE36l",
+          "name": "Gmail OAuth (Sales Account)"
+        }
+      }
     },
     {
       "parameters": {
@@ -486,6 +511,17 @@
             "index": 0
           }
         ],
+        [
+          {
+            "node": "Ask for Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask for Feedback": {
+      "main": [
         [
           {
             "node": "Prepare Feedback",
